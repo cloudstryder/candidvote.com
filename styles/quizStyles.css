@@ -1,0 +1,117 @@
+.progress {
+  margin: 1rem;
+  margin-top: 1.8rem;
+  width: 70%;
+  height: 1rem;
+  float: right;
+}
+
+.endAssessmentButton {
+  float: right;
+  margin: 1rem;
+}
+
+.questionMain {
+  margin-bottom: 10vh;
+  text-align: center;
+}
+
+.emojis {
+  width: 60%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 20vh;
+  margin-bottom:10vh;
+  background-color: white;
+  box-shadow: 0px 0px 50px #e8ecff;
+  border-radius: 25px;
+  display: flex;
+  justify-content:center;
+
+}
+
+.buttons {
+  width: 60%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.buttons > button {
+  height: 3rem;
+}
+
+.emojis img {
+  margin-left: 3%;
+  margin-right: 3%;
+  width: 100px;
+  margin-bottom: 2vh;
+  transition: .2s;
+  filter: grayscale(100%);
+}
+
+.emojis img:hover {
+  transform: scale(1.5);
+  filter: grayscale(0%);
+}
+
+.previousQuesitonButton {
+  position: absolute;
+  left: 50%;
+  bottom: 20%;
+  transform: translate(-50%, 0%);
+  float: bottom;
+}
+
+/* remove emoji box drop shadow and make it 100% width */
+
+@media screen and (max-width: 1430px) {
+  .emojis {
+    width: 100%;
+    box-shadow: 0px 0px 0px #e8ecff;
+  }
+}
+
+/* make emojis smaller */
+
+@media screen and (max-width: 900px) {
+  .emojis img {
+    width: 10vw;
+  }
+}
+
+/* prog bar smaller */
+@media screen and (max-width: 845px) {
+  .progress {
+    width: 60%;
+  }
+}
+
+/* prog bar smaller */
+
+@media screen and (max-width: 633px) {
+  .progress {
+    width: 50%;
+  }
+}
+
+/* prog bar smaller */
+
+@media screen and (max-width: 500px) {
+  .progress {
+    width: 40%;
+  }
+}
+
+/* make logo and question margin smaller */
+
+@media screen and (max-width: 450px) {
+  .questionMain {
+    margin-bottom: 5vh;
+  }
+
+  .progress {
+    margin-top: 1.4rem;
+  }
+}

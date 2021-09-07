@@ -1,0 +1,193 @@
+
+body {
+  background-color: #efefef;
+}
+
+header {
+  margin-bottom: 20vh;
+}
+
+.logo {
+  width: 10rem;
+  margin: 1rem;
+  float: left;
+}
+
+.progress {
+  margin: 1rem;
+  margin-top: 1.8rem;
+  width: 70%;
+  height: 1rem;
+  float: right;
+}
+
+.endAssessmentButton {
+  float: right;
+  margin: 1rem;
+}
+
+.mainContent {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%); /* relative to element's height & width */
+  background-color: white;
+  height: 1000%;
+  width: 80%;
+}
+
+.questionMain {
+  margin-bottom: 10vh;
+  text-align: center;
+}
+
+.emojis {
+  width: 60%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 20vh;
+  margin-bottom:10vh;
+  background-color: white;
+  box-shadow: 0px 0px 50px #e8ecff;
+  border-radius: 25px;
+  display: flex;
+  justify-content:center;
+
+}
+
+.emojis img {
+  margin-left: 3%;
+  margin-right: 3%;
+  width: 100px;
+  margin-bottom: 2vh;
+  transition: .2s;
+}
+
+.previousQuesitonButton {
+  position: absolute;
+  left: 50%;
+  bottom: 30%;
+  transform: translate(-50%, 0%);
+  float: bottom;
+}
+
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.selected {
+  transform: scale(1.5);
+  filter: grayscale(0%);
+}
+
+.brandColor {
+  color: #2b49ff;
+}
+
+.resultContainer {
+  text-align: center;
+  margin-bottom: 5vh;
+}
+
+.resultContainer h1 {
+  font-size: 5rem;
+}
+
+.emojis img:hover {
+  transform: scale(1.5);
+  filter: grayscale(0%);
+}
+
+.links {
+  float: right;
+  width: 50%;
+  display: flex;
+  justify-content:space-between;
+  margin: 1.5rem;
+}
+
+.links button {
+  width: 5%;
+}
+
+.resultsHolder {
+  width: 70%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-38%, 0%);
+}
+
+.card {
+  margin-bottom:  5vh;
+}
+
+/* remove emoji box drop shadow and make it 100% width */
+
+@media screen and (max-width: 1430px) {
+  .emojis {
+    width: 100%;
+    box-shadow: 0px 0px 0px #e8ecff;
+  }
+
+
+}
+
+/* make emojis smaller */
+
+@media screen and (max-width: 900px) {
+  .emojis img {
+    width: 10vw;
+  }
+
+  .choiceName {
+    font-size: 1rem;
+    bottom: 33%;
+  }
+
+  .resultContainer h1 {
+    font-size: 3rem;
+  }
+}
+
+/* prog bar smaller */
+@media screen and (max-width: 845px) {
+  .progress {
+    width: 60%;
+  }
+}
+
+/* prog bar smaller */
+
+@media screen and (max-width: 633px) {
+  .progress {
+    width: 50%;
+  }
+
+  
+}
+
+/* prog bar smaller */
+
+@media screen and (max-width: 500px) {
+  .progress {
+    width: 40%;
+  }
+}
+
+/* make logo and question margin smaller */
+
+@media screen and (max-width: 450px) {
+  .questionMain {
+    margin-bottom: 5vh;
+  }
+
+  .logo {
+    width: 30%;
+  }
+
+  .progress {
+    margin-top: 1.4rem;
+  }
+
+
+}

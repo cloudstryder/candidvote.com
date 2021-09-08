@@ -15,6 +15,11 @@
 .card-title {
   filter: drop-shadow(1px 1px 8px black);
 } */
+.mainText {
+  /* padding: 5px 10px 15px 20px; top right bottom left */
+  padding: 5px 20px 5px 20px;
+}
+
 
 .center-content {
   margin: 0;

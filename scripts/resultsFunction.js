@@ -34,9 +34,10 @@ candidateResults.forEach(function(candidate){
     var diffTemp = Math.abs(candidate["avgAxis"]-avg_axis); //total difference between candidate and user
   } else {
     var diffTemp = 0;
-    for(var i = 0; i < userAxioms.length; i++) {
-      diffTemp += Math.abs()
+    for(var i = 0; i < 5; i++) {
+      diffTemp += Math.abs(candidate["axioms"][i]-userAxioms[i])
     }
+    diffTemp /= 5;
   }
   //Add accuracy key to dict and push it sortedCandidates list;
   var candidateTemp = candidate;
@@ -56,8 +57,8 @@ function filter() {
     if(c.zip == zip || zip == "") {
       /* IMPORTANT */ 
       //STILL NEEDS TO BE UPDATED
-      var percentAccurate = parseInt(100-c["accuracy"]*5); //takes error, multiplies by 5, and subtracts from 100
-
+      // if ("avgAxis" in c) {
+        var percentAccurate = parseInt(((1-c["accuracy"]/20)*100).toFixed(2)); //takes error, multiplies by 5, and subtracts from 100
       if(percentAccurate > 85) {
         var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+percentAccurate+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
       } else {

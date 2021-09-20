@@ -5,7 +5,7 @@ const urlParams = new URLSearchParams(window.location.search);
 var avg_axis = 0;
 var numOfAxis = 0;
 var userAxioms = [];
-
+const NUMBER_OF_AXES = 5
 
 /* IMPORTANT */
 
@@ -31,14 +31,21 @@ var sortedCandidates = [];
 candidateResults.forEach(function(candidate){
   /* IMPORTANT */
   if ("avgAxis" in candidate) {
-    var diffTemp = Math.abs(candidate["avgAxis"]-avg_axis); //total difference between candidate and user
+    // var diffTemp = Math.abs(candidate["avgAxis"]-avg_axis); //total difference between candidate and user
+    var diffTemp = 0;
+    for(var i = 0; i < NUMBER_OF_AXES; i++) {
+      diffTemp += Math.abs(candidate["avgAxis"]-userAxioms[i])
+    }
+    diffTemp /= NUMBER_OF_AXES;
   } else {
     var diffTemp = 0;
-    for(var i = 0; i < 5; i++) {
+    for(var i = 0; i < NUMBER_OF_AXES; i++) {
       diffTemp += Math.abs(candidate["axioms"][i]-userAxioms[i])
     }
-    diffTemp /= 5;
+    diffTemp /= NUMBER_OF_AXES;
   }
+
+  console.log(candidate["name"], diffTemp)
   //Add accuracy key to dict and push it sortedCandidates list;
   var candidateTemp = candidate;
   candidateTemp["accuracy"] = diffTemp;
@@ -50,15 +57,17 @@ sortedCandidates.sort(function(a,b) {
     return a.accuracy - b.accuracy;
 });
 
+
+// try writing code without .toFixed(2), update percent match on both functions (which does what)
+
+
 function filter() {
   var zip = $("#zipfilter").val();
   $(".resultsHolder").html("");
   sortedCandidates.forEach(function(c){
     if(c.zip == zip || zip == "") {
-      /* IMPORTANT */ 
-      //STILL NEEDS TO BE UPDATED
-      // if ("avgAxis" in c) {
-        var percentAccurate = parseInt(((1-c["accuracy"]/20)*100).toFixed(2)); //takes error, multiplies by 5, and subtracts from 100
+      /* IMPORTANT */  
+      var percentAccurate = parseInt(((1-(c["accuracy"]/20))*100).toFixed(2)); //percent match
       if(percentAccurate > 85) {
         var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+percentAccurate+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
       } else {
@@ -79,8 +88,8 @@ window.onload = function() {
 
   sortedCandidates.forEach(function(c){
     /* IMPORTANT */ //still need to change this, percent accurate is the actual % match from difference index
-    var percentAccurate = parseInt(100-c["accuracy"]*5);
-
+    var percentAccurate = parseInt(((1-c["accuracy"]/20)*100).toFixed(2));
+    console.log(percentAccurate)
     if(percentAccurate > 85) {
       var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+percentAccurate+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text" >'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
     } else {

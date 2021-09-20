@@ -93,14 +93,16 @@ window.onload = function() {
 }
 
 
-function userPercentageMatch(userAxioms, candidateAxioms) {
-  const AXIOM_RANGE = 20; //total range axiom can take, so in this case from  -10 to 10
-  var totalError = 0;
-  for(const key in Object.keys(userAxioms)) {
-      totalError += Math.abs(userAxioms[key] - candidateAxioms[key]);
-  }
-  var averageError = totalError/Object.keys(userAxioms).length;
-  var percentMatchRaw = averageError/AXIOM_RANGE;
-  var finalPercentMatch = (percentMatchRaw * 100).toFixed(2);
-  return finalPercentMatch;
-}
+// former function for reference
+
+// function userPercentageMatch(userAxioms, candidateAxioms) {
+//   const AXIOM_RANGE = 20; 
+//   var totalError = 0;
+//   for(const key in Object.keys(userAxioms)) {
+//       totalError += Math.abs(userAxioms[key] - candidateAxioms[key]);
+//   }
+//   var averageError = totalError/Object.keys(userAxioms).length;
+//   var percentMatchRaw = averageError/AXIOM_RANGE;
+//   var finalPercentMatch = (percentMatchRaw * 100).toFixed(2);
+//   return finalPercentMatch;
+// }

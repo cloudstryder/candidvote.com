@@ -2,7 +2,19 @@
 Dict contains all potential results a person can score. update w correct axiums and zips accordingly
 */
 // order of axioms: [pwt, ee, si, pb, h]
+/*
+  object template (more info on doc)
+  {
+    "name": "", 
+    "image":"", 
+    "text":"", 
+    "website": "", 
+    "zip": "", 
+    "axioms":[pwt, ee, si, pb, h]
+    "election":""
+  }
 
+*/
 candidateResults = [
   {
     "name": "Joe Biden", 

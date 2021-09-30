@@ -168,7 +168,7 @@ window.onload = function() {
       
       for(const [key, value] in Object.entries(c["links"])) {
         // <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>
-        var buttonCode = '<a href ='+key+'class="btn btn-primary">'+value+'</a>'
+        var buttonCode = '<a href =' + key + 'class="btn btn-primary">' + value + '</a>'
         htmlToAdd += buttonCode
       }
       

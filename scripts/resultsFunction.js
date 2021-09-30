@@ -82,7 +82,29 @@ function filter() {
       /* IMPORTANT */  
       var percentAccurate = ((1-(c["accuracy"]/20))*100); //percent match
       // effects ordering
-      var displayPercent = displayValue(percentAccurate)
+      var stringPercentAccurate = (percentAccurate*100).toString()
+      //display value
+      var displayPercent = percentAccurate
+      if (stringPercentAccurate.length > 4) {
+        displayPercent = stringPercentAccurate.substring(0,2) + "." + stringPercentAccurate.substring(2,4)
+      }
+      switch (stringPercentAccurate.length) {
+        case 4:
+          displayPercent = stringPercentAccurate.substring(0,2) + "." + stringPercentAccurate.substring(2,4)
+          break;
+        case 3:
+          displayPercent = stringPercentAccurate.charAt(0) + "." + stringPercentAccurate.substring(1,3)
+          break;
+        case 2:
+          displayPercent = "0." + stringPercentAccurate
+          break;
+        case 1:
+          displayPercent = "0.0" + stringPercentAccurate
+          break;
+        default: 
+          displayPercent = displayPercent
+          break;
+      }
       if(percentAccurate > 80) {
         var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
       } else {
@@ -104,16 +126,46 @@ window.onload = function() {
   sortedCandidates.forEach(function(c){
     /* IMPORTANT */ //still need to change this, percent accurate is the actual % match from difference index
     var percentAccurate = ((1 - c["accuracy"]/20)*100)
+    var stringPercentAccurate = (percentAccurate*100).toString()
     //display value
-    var displayPercent = displayValue(percentAccurate)
-
+    var displayPercent = percentAccurate
+    if (stringPercentAccurate.length > 4) {
+      displayPercent = stringPercentAccurate.substring(0,2) + "." + stringPercentAccurate.substring(2,4)
+    }
+    switch (stringPercentAccurate.length) {
+    case 4:
+      displayPercent = stringPercentAccurate.substring(0,2) + "." + stringPercentAccurate.substring(2,4)
+      break;
+    case 3:
+      displayPercent = stringPercentAccurate.charAt(0) + "." + stringPercentAccurate.substring(1,3)
+      break;
+    case 2:
+      displayPercent = "0." + stringPercentAccurate
+      break;
+    case 1:
+      displayPercent = "0.0" + stringPercentAccurate
+      break;
+    default: 
+      displayPercent = displayPercent
+      break;
+  }
     // displayPercent = percentAccurate
 
     console.log(displayPercent, percentAccurate)
-    if(percentAccurate > 80) {
-      var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text" >'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
-    } else {
-      var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
+    if ("website" in c) {
+      if(percentAccurate > 80) {
+        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
+      } else {
+        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
+      }
+    }
+    if ("links" in c) {
+      if(percentAccurate > 80) {
+        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>';
+      } else {
+        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>';
+      }
+      htmlToAdd += '</div> </div>'
     }
     $(".resultsHolder").append(htmlToAdd);
 

@@ -3,17 +3,21 @@ Dict contains all potential results a person can score. update w correct axiums 
 */
 // order of axioms: [pwt, ee, si, pb, h]
 /*
-  object template (more info on doc)
+  NEW object template (more info on doc)
   {
     "name": "", 
     "image":"", 
     "text":"", 
-    "website": "", 
+    "links": {
+      "website title":"website url",
+      "website title2":"website url2"
+    }, 
     "zip": "", 
     "axioms":[pwt, ee, si, pb, h]
     "election":""
   }
-
+  
+  note: the old candidate objects had avgAxis:number instead of axioms:[] and website:"url" instead of "links":{}
 */
 candidateResults = [
   {

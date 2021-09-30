@@ -161,10 +161,17 @@ window.onload = function() {
     }
     if ("links" in c) {
       if(percentAccurate > 80) {
-        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>';
+        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> ';
       } else {
-        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>';
+        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p>';
       }
+      
+      for(const [key, value] in Object.entries(c["links"])) {
+        // <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>
+        var buttonCode = '<a href ='+key+'class="btn btn-primary">'+value+'</a>'
+        htmlToAdd += buttonCode
+      }
+      
       htmlToAdd += '</div> </div>'
     }
     $(".resultsHolder").append(htmlToAdd);

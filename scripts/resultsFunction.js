@@ -105,6 +105,13 @@ function filter() {
           displayPercent = displayPercent
           break;
       }
+      // add verified check mark to name/image
+      if ('verified' in c) {
+
+      } else {
+
+      }
+
       if(percentAccurate > 80) {
         var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
       } else {

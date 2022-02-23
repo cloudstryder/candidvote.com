@@ -25,7 +25,7 @@ candidateResults = [
     "image":"https://www.whitehouse.gov/wp-content/uploads/2021/04/P20210303AS-1901-cropped.jpg", 
     "text":"Joseph Robinette Biden Jr. (born November 20, 1942) is an American politician who is the 46th and current president of the United States. A member of the Democratic Party, he served as the 47th vice president from 2009 to 2017 under Barack Obama and represented Delaware in the United States Senate from 1973 to 2009. (via wikipedia)", 
     "website": "https://joebiden.com/presidency-for-all-americans/", 
-    "zip": "00000", 
+    "zip": ["00000"], 
     "avgAxis": "-2", //will be replaced with "axioms":[pwt, ee, si, pb, h]
     "election":"2016 Presidential Race"
   },

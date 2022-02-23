@@ -78,7 +78,7 @@ function filter() {
   var zip = $("#zipfilter").val();
   $(".resultsHolder").html("");
   sortedCandidates.forEach(function(c){
-    if(c.zip == zip || zip == "") {
+    if ((typeof c.zip == 'object' && c.zip.includes(zip) || c.zip == zip || zip == '')) {
       /* IMPORTANT */  
       var percentAccurate = ((1-(c["accuracy"]/20))*100); //percent match
       // effects ordering

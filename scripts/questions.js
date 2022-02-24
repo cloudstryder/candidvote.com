@@ -1,4 +1,5 @@
 /*
+-10 = progressive, 10 = conservative
 pwt: public works/transport
 ee: environment/energy
 si: social issues

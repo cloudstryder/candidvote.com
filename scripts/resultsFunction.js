@@ -78,7 +78,13 @@ function filter() {
   var zip = $("#zipfilter").val();
   $(".resultsHolder").html("");
   sortedCandidates.forEach(function(c){
-    if ((typeof c.zip == 'object' && c.zip.includes(zip) || c.zip == zip || zip == '')) {
+    var inputzip = zip.toLowerCase()
+    if (typeof c.zip == 'object') {
+      var czips = c.zip.map((zip) => zip.toLowerCase())
+    } else {
+      var czips = c.zip.toLowerCase();
+    }
+    if ((typeof czips == 'object' && czips.includes(inputzip) || czips == inputzip || inputzip == '')) {
       /* IMPORTANT */  
       var percentAccurate = ((1-(c["accuracy"]/20))*100); //percent match
       // effects ordering
@@ -111,12 +117,36 @@ function filter() {
       } else {
 
       }
-
-      if(percentAccurate > 80) {
-        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
-      } else {
-        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
+      if (Object.keys(c).includes('website')) {
+        console.log('contains website')
+        if(percentAccurate > 80) {
+          var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p> <a href="'+c["website"]+'" target="_blank" class="btn btn-primary">Learn More</a> </div> </div>';
+        } else {
+          var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p> <a href="'+c["website"]+'" target="_blank" class="btn btn-primary">Learn More</a> </div> </div>';
+        }
+      } else if (Object.keys(c).includes('links')) {
+        console.log("multi link support")
+        if(percentAccurate > 80) {
+          var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p>';
+        } else {
+          var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p>';
+        }
+        // for (website_name in Object.keys(c['links'])) {
+        Object.keys(c["links"]).forEach(function(key){
+          var buttonCode = '<a href ="' + c['links'][key] + '" target="_blank" class="btn btn-primary">' + key + '</a>'
+          htmlToAdd += buttonCode
+        });
+        
+        htmlToAdd += '</div> </div>'
+  
+        // for(const [key, value] in Object.entries(c["links"])) {
+        //   // <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>
+        //   buttonCode = '<a href ="' + key + '" class="btn btn-primary">' + value + '</a>'
+        //   htmlToAdd += buttonCode
+        // } 
       }
+      
+
       $(".resultsHolder").append(htmlToAdd);
     }
 
@@ -140,46 +170,53 @@ window.onload = function() {
       displayPercent = stringPercentAccurate.substring(0,2) + "." + stringPercentAccurate.substring(2,4)
     }
     switch (stringPercentAccurate.length) {
-    case 4:
-      displayPercent = stringPercentAccurate.substring(0,2) + "." + stringPercentAccurate.substring(2,4)
-      break;
-    case 3:
-      displayPercent = stringPercentAccurate.charAt(0) + "." + stringPercentAccurate.substring(1,3)
-      break;
-    case 2:
-      displayPercent = "0." + stringPercentAccurate
-      break;
-    case 1:
-      displayPercent = "0.0" + stringPercentAccurate
-      break;
-    default: 
-      displayPercent = displayPercent
-      break;
-  }
+      case 4:
+        displayPercent = stringPercentAccurate.substring(0,2) + "." + stringPercentAccurate.substring(2,4)
+        break;
+      case 3:
+        displayPercent = stringPercentAccurate.charAt(0) + "." + stringPercentAccurate.substring(1,3)
+        break;
+      case 2:
+        displayPercent = "0." + stringPercentAccurate
+        break;
+      case 1:
+        displayPercent = "0.0" + stringPercentAccurate
+        break;
+      default: 
+        displayPercent = displayPercent
+        break;
+    }
     // displayPercent = percentAccurate
 
-    console.log(displayPercent, percentAccurate)
-    if ("website" in c) {
+    // console.log(displayPercent, percentAccurate)
+    // console.log(Object.keys(c))
+    if (Object.keys(c).includes('website')) {
+      console.log('contains website')
       if(percentAccurate > 80) {
-        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
+        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p> <a href="'+c["website"]+'" target="_blank" class="btn btn-primary">Learn More</a> </div> </div>';
       } else {
-        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a> </div> </div>';
+        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p> <a href="'+c["website"]+'" target="_blank" class="btn btn-primary">Learn More</a> </div> </div>';
       }
-    }
-    if ("links" in c) {
+    } else if (Object.keys(c).includes('links')) {
+      console.log("multi link support")
       if(percentAccurate > 80) {
-        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p> ';
+        var htmlToAdd = '<div class="card w-75 border-primary"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b class="text-primary">'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p>';
       } else {
-        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip code: '+c["zip"]+'</p>';
+        var htmlToAdd = '<div class="card w-75"> <div class="card-body"> <h5 class="card-title">'+c["name"]+' <b>'+displayPercent+'% Match</b></h5> <img class="card-img" src="'+c["image"]+'" style="padding-left: 15px" alt="Card image cap"> <strong class="card-text">'+c["election"]+'</strong> <p class="card-text">'+c["text"]+'</p> <p>Zip Code/City: '+c["zip"]+'</p>';
       }
-      
-      for(const [key, value] in Object.entries(c["links"])) {
-        // <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>
-        var buttonCode = '<a href =' + key + 'class="btn btn-primary">' + value + '</a>'
+      // for (website_name in Object.keys(c['links'])) {
+      Object.keys(c["links"]).forEach(function(key){
+        var buttonCode = '<a href ="' + c['links'][key] + '" target="_blank" class="btn btn-primary">' + key + '</a>'
         htmlToAdd += buttonCode
-      }
+      });
       
       htmlToAdd += '</div> </div>'
+
+      // for(const [key, value] in Object.entries(c["links"])) {
+      //   // <a href="'+c["website"]+'" class="btn btn-primary">Learn More</a>
+      //   buttonCode = '<a href ="' + key + '" class="btn btn-primary">' + value + '</a>'
+      //   htmlToAdd += buttonCode
+      // } 
     }
     $(".resultsHolder").append(htmlToAdd);
 

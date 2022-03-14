@@ -53,7 +53,7 @@ candidateResults = [
 },
 
 {
-  "name": "Jonathan Royce Esteban", "image":"https://sanjosespotlight.s3.us-east-2.amazonaws.com/wp-content/uploads/2021/06/23175338/Esteban-2022-Democrat-e1624578809796.png", "text":"As Mayor of San Jose, Esteban promises to improve city employee experiences, enhance city beautification, and fight for equitable wages for working people in the city. Esteban will be a mayor that puts working families and small businesses first. A champion of the ambitious progressive agenda “the Green New Deal for San Jose,” Esteban seeks to rapidly increasing urban housing developments, generate more tax revenue for city services with a slate of green infrastructure jobs, adequately staff up our emergency agencies, and demand healthcare for all.", 
+  "name": "Jonathan Royce Esteban", "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdQ9GAWCciIMgBg_T2qKR20MBhW8qvBxxSsu12eEgNG2Pe7a-Ut4vnn55h6OE4B6Yv6VA&usqp=CAU", "text":"As Mayor of San Jose, Esteban promises to improve city employee experiences, enhance city beautification, and fight for equitable wages for working people in the city. Esteban will be a mayor that puts working families and small businesses first. A champion of the ambitious progressive agenda “the Green New Deal for San Jose,” Esteban seeks to rapidly increasing urban housing developments, generate more tax revenue for city services with a slate of green infrastructure jobs, adequately staff up our emergency agencies, and demand healthcare for all.", 
   "links": {"website title":"https://vote4esteban.com/",}, "zip": ["San Jose"], "axioms":[-7, -8, -5, -4, -7],"election":"2022 San Jose Mayoral Race"
 },
 
